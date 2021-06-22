@@ -18,9 +18,9 @@ def tick(timer):
                 print(rxdata[(rxdata.find(cmd) + len(cmd)):].strip())
         except:
             print('Error')
-    cmd = ''
+    cmd = '' 
 
-tim.init(freq=2, mode=Timer.PERIODIC, callback=tick) 
+tim.init(freq=20, mode=Timer.PERIODIC, callback=tick)
 
 rxdata = uart.read()
 rxdata = ''
@@ -29,5 +29,6 @@ while True:
     if cmd == 'quit':
         break
     sleep(0.1)
-    
+
+tim.deinit()
 print('End')
