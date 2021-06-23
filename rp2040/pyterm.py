@@ -34,16 +34,16 @@ def clear_buf():
 
 def tick(timer):
     global cmd
-    if cmd:
-        tim.deinit()
+    tim.deinit()
+    if cmd:        
         decode(send(cmd))
         cmd = ''
-        tim.init(freq=20, mode=Timer.PERIODIC, callback=tick)
     else:
         if uart.any():
             decode(uart.read())
+    tim.init(freq=100, mode=Timer.PERIODIC, callback=tick)
 
-tim.init(freq=20, mode=Timer.PERIODIC, callback=tick)
+tim.init(freq=100, mode=Timer.PERIODIC, callback=tick)
 
 rxdata = uart.read()
 rxdata = ''
