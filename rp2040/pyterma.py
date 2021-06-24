@@ -52,18 +52,15 @@ def tick(timer):
     global cmd
     tim.deinit()
     if cmd:        
-        send1(cmd)
-        for i in range(12):
-            data = recv().decode('ascii').strip()
-            print(data)
+        decode(send(cmd))
         cmd = ''
 
     if uart.any():
-        print(recv().decode('ascii').strip())
-    tim.init(freq=100, mode=Timer.PERIODIC, callback=tick)
+        decode(recv())
+    tim.init(freq=50, mode=Timer.PERIODIC, callback=tick)
 #            decode(uart.read())
 
-tim.init(freq=20, mode=Timer.PERIODIC, callback=tick)
+tim.init(freq=50, mode=Timer.PERIODIC, callback=tick)
 
 rxdata = uart.read()
 rxdata = ''
